@@ -92,6 +92,7 @@ struct thread
 
     /* Shared between thread.c and synch.c. */
     struct list_elem elem;              /* List element. */
+    uint64_t time_thread_sleeping; // Tiempo que el thread estara dormido
 
 #ifdef USERPROG
     /* Owned by userprog/process.c. */
@@ -137,5 +138,9 @@ int thread_get_nice (void);
 void thread_set_nice (int);
 int thread_get_recent_cpu (void);
 int thread_get_load_avg (void);
+
+void insert_in_waiting_list(int64_t ticks);
+
+void remove_sleeping_thread(int64_t ticks);
 
 #endif /* threads/thread.h */
